@@ -23,10 +23,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -71,4 +68,15 @@ class DefaultFirebaseOptions {
     authDomain: 'food-app-flutter-57382.firebaseapp.com',
     storageBucket: 'food-app-flutter-57382.firebasestorage.app',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDDSBlNXP3t6qZIrykG2GQSAulS-ZDbxhw',
+    appId: '1:386749704846:ios:7446811219569c968e77df',
+    messagingSenderId: '386749704846',
+    projectId: 'food-app-flutter-57382',
+    storageBucket: 'food-app-flutter-57382.firebasestorage.app',
+    iosClientId: '386749704846-kdll010qvfsb3dpgjp1li7661tvmkugr.apps.googleusercontent.com',
+    iosBundleId: 'com.example.foodAppFlutter',
+  );
+
 }

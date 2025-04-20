@@ -12,7 +12,12 @@
           "package_name": "com.example.food_app_flutter"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "386749704846-n39gi2lbjd4181ckjh9jvdg63vvcbqgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCIFURPskB6wmLPsn9BlrGM0i83djTof9c"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386749704846-n39gi2lbjd4181ckjh9jvdg63vvcbqgb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "386749704846-kdll010qvfsb3dpgjp1li7661tvmkugr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodAppFlutter"
+              }
+            }
+          ]
         }
       }
     }

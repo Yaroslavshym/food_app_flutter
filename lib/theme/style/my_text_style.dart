@@ -9,14 +9,14 @@ extension MyTextExtension on MyText {
     switch (this) {
       case MyText.body:
         return TextStyle(
-          color: Colors.white,
+          color: Colors.transparent,
           fontSize: 14.sp,
           fontWeight: FontWeight.bold,
           height: (20 / 14).sp,
         );
       case MyText.h4:
         return TextStyle(
-          color: Colors.white,
+          color: Colors.transparent,
           fontSize: 32.sp,
           fontWeight: FontWeight.bold,
           height: (40 / 32).sp,
