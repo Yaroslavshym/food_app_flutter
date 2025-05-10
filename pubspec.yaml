@@ -60,6 +60,7 @@ dev_dependencies:
 flutter:
   assets:
     - lib/features/welcome/presentation/images/
+    - lib/features/home/presentation/images/
     - lib/theme/images/
 
   # The following line ensures that the Material Icons font is

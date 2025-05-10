@@ -28,15 +28,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event,
         emit,
       ) async {
-        emit(AuthLoadingState());
-        try {
-          await EmailAuthUseCase().signIn(
-            emailAddress: emailController.text,
-            password: passwordController.text,
-          );
-          emit(AuthLoadedState());
-        } catch (e) {
-          emit(AuthErrorState());
+        if (isEmailValidated && isPasswordValidated) {
+          emit(AuthLoadingState(previousState: AuthLoginState()));
+          try {
+            await EmailAuthUseCase().signIn(
+              emailAddress: emailController.text,
+              password: passwordController.text,
+            );
+            emit(AuthLoadedState());
+          } catch (e) {
+            emit(AuthErrorState(bodyMessage: e.toString()));
+          }
         }
       },
     );
@@ -52,17 +54,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event,
         emit,
       ) async {
-        emit(AuthLoadingState());
+        if (EmailAuthUseCase()
+                .emailValidation(emailAddress: emailController.text) &&
+            (EmailAuthUseCase()
+                .passwordValidation(password: passwordController.text)
+                .isEmpty) &&
+            nameController.text.length >= 3) {
+          emit(AuthLoadingState(previousState: AuthRegisterState()));
 
-        try {
-          await EmailAuthUseCase().signUp(
-            emailAddress: emailController.text,
-            password: passwordController.text,
-            name: nameController.text,
-          );
-          emit(AuthLoadedState());
-        } catch (e) {
-          emit(AuthErrorState());
+          try {
+            await EmailAuthUseCase().signUp(
+              emailAddress: emailController.text,
+              password: passwordController.text,
+              name: nameController.text,
+            );
+            emit(AuthLoadedState());
+          } catch (e) {
+            emit(AuthErrorState());
+          }
+        } else {
+          add(AuthEmailValidation(isRegister: true));
+          add(AuthPasswordValidation());
+          add(AuthNameValidation());
         }
       },
     );
@@ -77,7 +90,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       event,
       emit,
     ) {
-      emit(AuthLoadingState());
+      emit(AuthLoadingState(previousState: AuthLoginState()));
     });
     // privacy terms checkbox
     on<AuthTogglePrivacyAgree>((
@@ -100,7 +113,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emailController.text = event.controllerText;
       }
     });
-    // controller validation
+    // controller validation only for register
     on<AuthPasswordValidation>((
       event,
       emit,
@@ -113,10 +126,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthEmailValidation>((
       event,
       emit,
-    ) {
+    ) async {
       isEmailValidated = EmailAuthUseCase()
           .emailValidation(emailAddress: emailController.text);
-      emit(AuthRegisterState());
+      emit(event.isRegister ? AuthRegisterState() : AuthLoginState());
     });
     on<AuthNameValidation>((
       event,

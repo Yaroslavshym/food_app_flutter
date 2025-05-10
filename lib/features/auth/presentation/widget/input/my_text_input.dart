@@ -8,7 +8,7 @@ class MyTextInput extends StatefulWidget {
   bool obscurePasswordText;
   final String hintText;
   final bool isSuffixIcon;
-  final void Function(String text) onChanged;
+  final void Function(String text) onChanged; // when user types something
   final TextStyle textStyle;
   MyTextInput({
     Key? key,

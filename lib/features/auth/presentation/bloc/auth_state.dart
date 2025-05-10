@@ -15,8 +15,15 @@ final class AuthResetPasswordLoadingState extends AuthState {}
 final class AuthRegisterState extends AuthState {}
 
 // after login/register
-final class AuthErrorState extends AuthState {}
 
-final class AuthLoadingState extends AuthState {}
+final class AuthLoadingState extends AuthState {
+  final AuthState previousState;
+  AuthLoadingState({required this.previousState});
+}
+
+final class AuthErrorState extends AuthState {
+  final String? bodyMessage;
+  AuthErrorState({this.bodyMessage});
+}
 
 final class AuthLoadedState extends AuthState {}

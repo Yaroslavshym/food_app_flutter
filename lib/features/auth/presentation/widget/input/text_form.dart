@@ -6,13 +6,14 @@ import '../../../../../theme/style/my_text_style.dart';
 import 'my_text_input.dart';
 
 class TextForm extends StatelessWidget {
-  final String name;
+  final String
+      name; // text at the top of input and inside field 'Enter your $name'
   final TextEditingController textEditingController;
-  bool obscureText;
-  final bool isSuffixIcon;
-  final bool isBorderHighlight;
-  final void Function(String text) onChanged;
-  final Widget extraWidget;
+  bool obscureText; // do we hide the text
+  final bool isSuffixIcon; // do we add icon such as hide password
+  final bool isBorderHighlight; // do we need to highlight the border
+  final void Function(String text) onChanged; // when user types something
+  final Widget extraWidget; // Used for password problems
 
   TextForm({
     required this.onChanged,

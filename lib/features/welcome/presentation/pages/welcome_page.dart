@@ -35,7 +35,8 @@ class _WelcomePageState extends State<WelcomePage> {
               image: DecorationImage(
                 fit: BoxFit.fitHeight,
                 image: AssetImage(
-                    'lib/features/welcome/presentation/images/image${widget.pageNumber}.png'),
+                  'lib/features/welcome/presentation/images/image${widget.pageNumber}.png',
+                ),
               ),
             ),
 
@@ -70,7 +71,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     ),
                     SizedBox(height: 16.h),
                     Text(
-                      'All the best restaurants with their top menu waiting for you, they cant’t wait for your order!!',
+                      'All the best restaurants with their top home waiting for you, they cant’t wait for your order!!',
                       textAlign: TextAlign.center,
                       style:
                           MyText.body.textStyle.copyWith(color: Colors.white),

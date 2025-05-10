@@ -42,14 +42,11 @@ class RemoteEmailAuth {
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == 'invalid-credential') {
-        throw ErrorDescription(
-            'Failed to sign in!\nNo user found for that email!');
+        throw ErrorDescription('No user found for that email!');
       } else if (e.code == 'wrong-password') {
-        throw ErrorDescription(
-            'Failed to sign in!\n Wrong password provided for that user!');
+        throw ErrorDescription('Wrong password provided for that user!');
       } else {
-        throw ErrorDescription(
-            'Failed to sign in!\nFirebaseAuthException\n$e\n${e.code}');
+        throw ErrorDescription('FirebaseAuthException\n$e\n${e.code}');
       }
 
       // if (e.code == 'user-not-found' || e.code == 'invalid-credential') {

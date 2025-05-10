@@ -10,6 +10,8 @@ import 'package:food_app_flutter/features/auth/presentation/pages/auth_page.dart
 import 'package:food_app_flutter/features/welcome/presentation/pages/welcome_page.dart';
 import 'package:window_size/window_size.dart';
 
+import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/home/presentation/pages/home_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -18,6 +20,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   if (Platform.isMacOS) {
     setWindowTitle("My Flutter Desktop App");
     // // setWindowFrame(const Rect.fromLTWH(100, 0, 400, 800));
@@ -51,14 +54,19 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AuthBloc(),
         ),
-        // BlocProvider(
-        //   create: (context) => AppBloc(),
-        // )
+        BlocProvider(
+          create: (context) => HomeBloc(),
+        )
       ],
       child: ScreenUtilInit(
         designSize: Size(375, 812),
         child: MaterialApp(
-          initialRoute: '/welcome/welcome_page',
+          theme: ThemeData(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            splashFactory: NoSplash.splashFactory,
+          ),
+          initialRoute: '/home/home',
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case '/welcome/welcome_page':
@@ -72,6 +80,8 @@ class MyApp extends StatelessWidget {
                 );
               case '/auth/signin':
                 return slideTransitionBuilder(child: LogInPage());
+              case '/home/home':
+                return slideTransitionBuilder(child: HomePage());
               default:
                 return slideTransitionBuilder(child: WelcomePage());
             }

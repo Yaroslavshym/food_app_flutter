@@ -18,7 +18,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppLoggedIn>(
       (event, emit) {
         // emit(());
-        //       to main menu
+        //       to main home
       },
     );
   }

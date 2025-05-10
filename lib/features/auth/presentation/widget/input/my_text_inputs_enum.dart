@@ -14,6 +14,7 @@ extension MyTextInputsExtension on MyTextInputs {
     required BuildContext context,
     required TextEditingController textEditingController,
     bool isValidation = false,
+    required bool isRegister,
   }) {
     void updateController(String controllerName) {
       context.read<AuthBloc>().add(AuthTextControllerChange(
@@ -27,13 +28,15 @@ extension MyTextInputsExtension on MyTextInputs {
           builder: (context, state) {
             return TextForm(
               isBorderHighlight:
-                  !context.read<AuthBloc>().isEmailValidated && isValidation,
+                  isValidation && !context.read<AuthBloc>().isEmailValidated,
               textEditingController: textEditingController,
               name: 'Email',
               onChanged: (String text) {
                 updateController('Email');
                 if (isValidation) {
-                  context.read<AuthBloc>().add(AuthEmailValidation());
+                  context
+                      .read<AuthBloc>()
+                      .add(AuthEmailValidation(isRegister: isRegister));
                 }
               },
             );
