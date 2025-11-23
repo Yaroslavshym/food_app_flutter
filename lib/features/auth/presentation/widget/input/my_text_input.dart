@@ -11,7 +11,7 @@ class MyTextInput extends StatefulWidget {
   final void Function(String text) onChanged; // when user types something
   final TextStyle textStyle;
   MyTextInput({
-    Key? key,
+    super.key,
     required this.onChanged,
     required this.textEditingController,
     required this.hintText,
@@ -19,7 +19,7 @@ class MyTextInput extends StatefulWidget {
     this.obscurePasswordText = false,
     this.isSuffixIcon = false,
     this.isBorderHighlight = false,
-  }) : super(key: key);
+  });
 
   final bool isBorderHighlight;
 

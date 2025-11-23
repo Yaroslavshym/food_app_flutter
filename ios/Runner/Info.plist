@@ -45,6 +45,25 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocalNetworkUsageDescription</key>
+    <string>This app requires access to the local network for debugging.</string>
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_dartobservatory._tcp</string>
+    </array>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>We need access to your local network for Flutter development.</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>Needed for Flutter’s VM service to allow debug tooling over the network.</string>
+
+    <key>NSBonjourServices</key>
+    <array>
+        <!-- this is the service type that Flutter’s VM publishes -->
+        <string>_dartobservatory._tcp</string>
+    </array>
+
+
+
 
 </dict>
 </plist>

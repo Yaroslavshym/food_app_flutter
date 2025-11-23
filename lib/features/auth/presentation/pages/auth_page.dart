@@ -15,7 +15,7 @@ import '../widget/input/my_text_inputs_enum.dart';
 import '../widget/my_checkbox.dart';
 
 class LogInPage extends StatelessWidget {
-  LogInPage({super.key});
+  const LogInPage({super.key});
 
   @override
   Widget build(BuildContext context) {

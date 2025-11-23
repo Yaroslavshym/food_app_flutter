@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,28 +16,32 @@ import 'features/home/presentation/pages/home_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  if (Platform.isMacOS) {
+  if (!kIsWeb && Platform.isMacOS) {
     setWindowTitle("My Flutter Desktop App");
     // // setWindowFrame(const Rect.fromLTWH(100, 0, 400, 800));
     setWindowMinSize(const Size(380, 800));
     setWindowMaxSize(const Size(380, 800));
   }
-  if (Platform.isAndroid) {
+  if (!kIsWeb && Platform.isAndroid) {
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge, overlays: [
     //   SystemUiOverlay.top,
     //   SystemUiOverlay.bottom,
     // ]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent, // Top bar background
-      statusBarIconBrightness: Brightness.dark, // Icon color: dark or light
-      systemNavigationBarColor: Colors.black, // Bottom nav bar background
-      systemNavigationBarIconBrightness: Brightness.light, // Icon color
+      statusBarColor: Colors.transparent,
+      // Top bar background
+      statusBarIconBrightness: Brightness.dark,
+      // Icon color: dark or light
+      systemNavigationBarColor: Colors.black,
+      // Bottom nav bar background
+      systemNavigationBarIconBrightness: Brightness.light,
+      // Icon color
       systemNavigationBarDividerColor: Colors.transparent,
     ));
   }
@@ -97,14 +102,14 @@ PageRouteBuilder slideTransitionBuilder(
   return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => child,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        final _position = animation.drive(
+        final position = animation.drive(
           Tween<Offset>(
             begin: isNext ? const Offset(1, 0) : const Offset(-1, 0),
             end: Offset(0, 0),
           ),
         );
 
-        return SlideTransition(position: _position, child: child);
+        return SlideTransition(position: position, child: child);
       },
       transitionDuration: Duration(milliseconds: 100));
 

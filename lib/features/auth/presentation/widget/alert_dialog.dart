@@ -11,7 +11,7 @@ class MyAlertDialog extends StatelessWidget {
   final String buttonText;
   final VoidCallback onTap;
   // () => Navigator.pop(context)}
-  const MyAlertDialog({
+  const MyAlertDialog({super.key, 
     required this.title,
     required this.body,
     this.buttonText = 'OK',

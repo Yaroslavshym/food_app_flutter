@@ -8,13 +8,13 @@ class MyState {
     // returns login only if its login state or loading state but previous was login state
     if (state is AuthLoginState ||
         (state is AuthLoadingState &&
-            (state as AuthLoadingState).previousState is AuthLoginState)) {
+            (state).previousState is AuthLoginState)) {
       return MyStates.login;
 
       // returns register only if its register state or loading state but previous was register state
     } else if (state is AuthRegisterState ||
         (state is AuthLoadingState &&
-            (state as AuthLoadingState).previousState is AuthRegisterState)) {
+            (state).previousState is AuthRegisterState)) {
       return MyStates.register;
     } else {
       return MyStates.other;

@@ -4,6 +4,7 @@ import '../../domain/repository_abs/google_auth_repository_abs.dart';
 import '../data_sources/external/google_auth.dart';
 
 class GoogleAuthRepositoryImpl implements GoogleAuthRepositoryAbs {
+  @override
   Future<UserCredential> signInWithGoogle() async {
     // if (FirebaseAuth.instance.currentUser != null) {
     //   signOutWithGoogle();
@@ -11,6 +12,7 @@ class GoogleAuthRepositoryImpl implements GoogleAuthRepositoryAbs {
     return RemoteGoogleAuth().signInWithGoogle();
   }
 
+  @override
   Future<void> signOutWithGoogle() async {
     await RemoteGoogleAuth().signOutFromGoogle();
   }

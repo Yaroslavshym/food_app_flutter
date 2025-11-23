@@ -4,7 +4,7 @@ class MyTextButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final TextStyle textStyle;
-  const MyTextButton({
+  const MyTextButton({super.key, 
     required this.text,
     required this.onTap,
     required this.textStyle,

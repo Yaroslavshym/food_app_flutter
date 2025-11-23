@@ -5,8 +5,8 @@ import 'package:food_app_flutter/theme/style/my_colors.dart';
 class MyIconButton extends StatelessWidget {
   final String imageName;
   final VoidCallback onTap;
-  const MyIconButton({Key? key, required this.imageName, required this.onTap})
-      : super(key: key);
+
+  const MyIconButton({super.key, required this.imageName, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class MyIconButton extends StatelessWidget {
         child: Container(
             height: 40.h,
             width: 40.w,
-            padding: EdgeInsets.all(5.w),
+            padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(

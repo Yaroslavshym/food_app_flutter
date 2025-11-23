@@ -15,7 +15,7 @@ class TextForm extends StatelessWidget {
   final void Function(String text) onChanged; // when user types something
   final Widget extraWidget; // Used for password problems
 
-  TextForm({
+  TextForm({super.key, 
     required this.onChanged,
     required this.name,
     required this.textEditingController,

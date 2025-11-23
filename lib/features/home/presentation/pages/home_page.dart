@@ -9,15 +9,26 @@ import '../../../../theme/style/my_colors.dart';
 import '../bloc/home_bloc.dart';
 import '../widget/category_button.dart';
 
-List<String> categoryNames = ['Home', 'Cart', 'Message', 'Profile'];
-List<IconData> categoryIcons = [
+List<String> pageNames = ['Home', 'Cart', 'Message', 'Profile'];
+List<IconData> pageIcons = [
   Icons.home,
   Icons.shopping_bag,
   Icons.message,
   Icons.person,
 ];
 
+List<String> categoryNames = ['Burger', 'Drink', 'Pizza', 'Taco'];
+List<String> categoryIconUrls = [
+  'https://iili.io/3vs9NkP.png', // https://freeimage.host/i/3vs9NkP burger
+  'https://iili.io/3vLElx2.png', // https://freeimage.host/i/3vLElx2 drink
+  'https://iili.io/3vLV1iN.png', // https://freeimage.host/i/3vLV1iN pizza
+  'https://iili.io/3vLWvTJ.png', // https://freeimage.host/i/3vLWvTJ taco
+];
+List<Widget> categoryIcons = [];
+
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,17 +87,43 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   //   categories
-                  NavigationBar(
-                    backgroundColor: Colors.transparent,
-                    destinations: List.generate(
-                      min(categoryIcons.length, categoryNames.length),
-                      (i) {
-                        return CategoryButton(
-                          icon: categoryIcons.elementAt(i),
-                          label: categoryNames.elementAt(i),
-                        );
-                      },
-                    ),
+                  BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      return SizedBox(
+                        height: 65.h,
+                        width: MediaQuery.of(context).size.width,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          children: List.generate(
+                            min(pageIcons.length, categoryNames.length),
+                            (i) {
+                              return Row(
+                                children: [
+                                  SizedBox(
+                                    width: i != 0 ? 30.w : 0,
+                                  ),
+                                  CategoryButton(
+                                    buttonWidth: 59.w,
+                                    onTap: () => context.read<HomeBloc>().add(
+                                          ChangeCurrentCategoryIndex(
+                                            currentCategoryIndex: i,
+                                          ),
+                                        ),
+                                    isActive: context
+                                            .read<HomeBloc>()
+                                            .currentCategoryIndex ==
+                                        i,
+                                    imageUrl: categoryIconUrls.elementAt(i),
+                                    label: categoryNames.elementAt(i),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
                   ),
 
                   //   products
@@ -101,7 +138,7 @@ class HomePage extends StatelessWidget {
           return BottomNavigationBar(
             enableFeedback: false,
             showUnselectedLabels: false,
-            currentIndex: context.read<HomeBloc>().currentIndex,
+            currentIndex: context.read<HomeBloc>().currentPageIndex,
             selectedItemColor: MyColors.orange.color,
             selectedLabelStyle: MyText.body.textStyle.copyWith(
               color: MyColors.orange.color,
@@ -111,21 +148,21 @@ class HomePage extends StatelessWidget {
             onTap: (i) {
               context
                   .read<HomeBloc>()
-                  .add(ChangeCurrentBottomNavBarIndex(newCurrentIndex: i));
+                  .add(ChangeCurrentPageIndex(newCurrentPageIndex: i));
             },
             items: List.generate(
               4,
               (i) {
                 return BottomNavigationBarItem(
-                  label: categoryNames.elementAt(i),
+                  label: pageNames.elementAt(i),
                   // TODO:  change color
 
                   activeIcon: Icon(
-                    categoryIcons.elementAt(i),
+                    pageIcons.elementAt(i),
                     color: MyColors.orange.color,
                   ),
                   icon: Icon(
-                    categoryIcons.elementAt(i),
+                    pageIcons.elementAt(i),
                     color: MyColors.grey50.color,
                   ),
                 );

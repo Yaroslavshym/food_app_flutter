@@ -7,7 +7,7 @@ import '../widget/my_text_button.dart';
 
 class WelcomePage extends StatefulWidget {
   int pageNumber;
-  WelcomePage({this.pageNumber = 1});
+  WelcomePage({super.key, this.pageNumber = 1});
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();

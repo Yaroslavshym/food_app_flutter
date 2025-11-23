@@ -22,7 +22,7 @@ extension MyColorValues on MyColors {
   Color get color {
     switch (this) {
       case MyColors.grey10:
-        return CoreColors.darkTheme ? grey10
+        return CoreColors.darkTheme ? grey10:Colors.white;
       case MyColors.white:
         return CoreColors.darkTheme ? black : white;
       case MyColors.black:
